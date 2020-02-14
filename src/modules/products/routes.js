@@ -1,5 +1,7 @@
 const express = require('express')
 
+const verifyToken = require('../../middleware/verifyToken')
+
 const {
   getAllProducts,
   getProductById,
@@ -14,10 +16,10 @@ router.get('/', getAllProducts)
 
 router.get('/:id', getProductById)
 
-router.post('/', createNewProduct)
+router.post('/', verifyToken, createNewProduct)
 
-router.put('/:id', updateProduct)
+router.put('/:id', verifyToken, updateProduct)
 
-router.delete('/:id', deleteProduct)
+router.delete('/:id', verifyToken, deleteProduct)
 
 module.exports = router

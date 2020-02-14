@@ -1,12 +1,13 @@
 const express = require('express')
 
+const verifyToken = require('../../middleware/verifyToken')
 const { getAllUsers, getUserById } = require('./controller')
 
 const router = express.Router()
 
 
-router.get('/', getAllUsers)
+router.get('/', verifyToken, getAllUsers)
 
-router.get('/:id', getUserById)
+router.get('/:id', verifyToken, getUserById)
 
 module.exports = router
