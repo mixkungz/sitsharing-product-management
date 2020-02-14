@@ -8,17 +8,22 @@ const { loginSchema, createUserSchema } = require('./validates')
 const login = (req, res) => {
   loginSchema.validate(req.body, { abortEarly: false })
     .then(async() => {
-      const { username, password } = req.body
+      const { username, password, isLongLifeToken = false } = req.body
       const user = await knex('users').where({ username }).first()
     
       if (user === undefined || !bcrypt.compareSync(password, user.password, 10)) {
         return res.status(400).send({ message: 'Invalid username or password' })
       }
-    
-      const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
-        expiresIn: '20s'
-      })
-      return res.status(200).send({ token: token, expiredIn: 20 })
+      
+      const expiredTime = {
+        short: { label: '2m', sec: 120 },
+        long: { label: '30m', sec: 1800 }
+      }
+      const expiresIn = isLongLifeToken ? expiredTime.long.label : expiredTime.short.label
+      const expiredIn = isLongLifeToken ? expiredTime.long.sec : expiredTime.short.sec
+
+      const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn })
+      return res.status(200).send({ token: token, expiredIn })
     })
     .catch(err => {
       return res.status(500).send(err.errors)

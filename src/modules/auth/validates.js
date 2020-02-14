@@ -3,7 +3,8 @@ const yup = require('yup')
 module.exports = {
   loginSchema: yup.object().shape({
     username: yup.string().required(),
-    password: yup.string().required()
+    password: yup.string().required(),
+    isLongLifeToken: yup.boolean()
   }),
   createUserSchema: yup.object().shape({
     username: yup.string().min(6).required(),
