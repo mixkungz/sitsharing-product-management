@@ -10,11 +10,14 @@
   "author": "Phachara Kamthong",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^3.0.8",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "helmet": "^3.21.2",
     "knex": "^0.20.9",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "snakecase-keys": "^3.1.2",
+    "yup": "^0.28.1"
   }
 }
