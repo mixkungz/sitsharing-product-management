@@ -48,7 +48,7 @@ router.put('/:id', (req, res) => {
 
       try {
         await knex('products').where({ id }).update(req.body)
-        const product = await knex('products').where({ id })
+        const product = await knex('products').where({ id }).first()
 
         return res.status(200).send(product)
       } catch (error) {
