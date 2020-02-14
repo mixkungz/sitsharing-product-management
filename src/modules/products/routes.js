@@ -36,7 +36,7 @@ router.post('/', (req, res) => {
       }
     })
     .catch(err => {
-      return res.status(400).send(err.errors)
+      return res.status(500).send(err.errors)
     })
 })
 
@@ -63,7 +63,7 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
   const { id } = req.params
   await knex('products').where({ id }).del()
-  
+
   return res.status(204).send()
 })
 

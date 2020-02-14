@@ -35,7 +35,7 @@ router.post('/', (req, res) => {
 
         return res.status(201).send(user)
       } catch (error) {
-        return res.status(400).send({
+        return res.status(500).send({
           message: error.sqlMessage
         })
       }
