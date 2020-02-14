@@ -4,6 +4,8 @@ const helmet = require('helmet')
 const express = require('express')
 const bodyParser = require('body-parser')
 
+const routes = require('./src/routes')
+
 const app = express()
 const port = process.env.PORT || 3000
 
@@ -23,3 +25,5 @@ app.listen(port, () => {
 app.get('/api/v1', (_, res) => {
   return res.status(200).send({ message: 'API Work !'})
 })
+
+app.use('/api/v1', routes)
