@@ -2,7 +2,7 @@ const express = require('express')
 const snakeCaseKeys = require('snakecase-keys')
 
 const knex = require('../../../db')
-const { createProductSchema } = require('./validates')
+const { productSchema } = require('./validates')
 
 const router = express.Router()
 
@@ -20,7 +20,7 @@ router.get('/:id', async(req, res) => {
 })
 
 router.post('/', (req, res) => {
-  createProductSchema.validate(req.body, { abortEarly: false })
+  productSchema.validate(req.body, { abortEarly: false })
     .then(async() => {
       req.body = snakeCaseKeys(req.body)
 
