@@ -60,7 +60,7 @@ router.put('/:id', (req, res) => {
     })
 })
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async(req, res) => {
   const { id } = req.params
   await knex('products').where({ id }).del()
 
