@@ -40,4 +40,31 @@ router.post('/', (req, res) => {
     })
 })
 
+router.put('/:id', (req, res) => {
+  productSchema.validate(req.body, { abortEarly: false })
+    .then(async() => {
+      const { id } = req.params
+      req.body = snakeCaseKeys(req.body)
+
+      try {
+        await knex('products').where({ id }).update(req.body)
+        const product = await knex('products').where({ id })
+
+        return res.status(200).send(product)
+      } catch (error) {
+        return res.status(500).send(err.errors)
+      }
+    })
+    .catch(err => {
+      return res.status(400).send(err.errors)
+    })
+})
+
+router.delete('/:id', (req, res) => {
+  const { id } = req.params
+  await knex('products').where({ id }).del()
+  
+  return res.status(204).send()
+})
+
 module.exports = router
