@@ -55,4 +55,9 @@ const register = (req, res) => {
     })
 }
 
-module.exports = { login, register }
+const getMyInformation = async(req, res) => {
+  const user = await knex('users').where('id', req.userId).first()
+  return res.status(200).send(user)
+}
+
+module.exports = { login, register, getMyInformation }
