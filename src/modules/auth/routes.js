@@ -8,7 +8,7 @@ const router = express.Router()
 
 const limiter = rateLimit({
   windowMs: 5 * 60 * 1000,
-  max: 10,
+  max: 50,
   message:
     "Too request from this IP, please try again in 5 minuntes"
 })

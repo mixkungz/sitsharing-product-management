@@ -12,7 +12,7 @@ const port = process.env.PORT || 3000
 
 const apiLimiter = rateLimit({
   windowMs: 5 * 60 * 1000,
-  max: 100
+  max: 500
 });
 
 app.set('trust proxy', 1)
