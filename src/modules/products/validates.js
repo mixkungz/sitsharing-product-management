@@ -5,6 +5,6 @@ module.exports = {
     productName: yup.string().min(2).required(),
     productImage: yup.string(),
     productDetail: yup.string().min(10).required(),
-    stock: yup.number().positive().required()
+    price: yup.number().positive().required()
   }),
 }
