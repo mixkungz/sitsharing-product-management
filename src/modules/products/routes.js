@@ -24,10 +24,10 @@ router.get('/', getAllProducts)
 
 router.get('/:id', getProductById)
 
-router.post('/', [limiter, verifyToken], createNewProduct)
+router.post('/', limiter, createNewProduct)
 
-router.put('/:id', verifyToken, updateProduct)
+router.put('/:id', updateProduct)
 
-router.delete('/:id', verifyToken, deleteProduct)
+router.delete('/:id', deleteProduct)
 
 module.exports = router
